@@ -60,11 +60,16 @@ const createUser = (req, res) => {
   console.log('createUser', name, about, avatar, email, password);
   bcrypt.hash(password, 10)
     .then((hash) => {
-      User.create({
+      const user = User.create({
         name, about, avatar, email, password: hash,
       });
+      return user;
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send({
+      data: {
+        _id: user._id, name: user.name, about: user.about, avatar: user.avatar, email: user.email,
+      },
+    }))
     .catch((error) => {
       if (error.name === 'ValidationError') res.status(400).send({ message: `${error}` });
       else res.status(500).send({ message: `Произошла ошибка ${error}` });
