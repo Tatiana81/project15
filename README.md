@@ -1,4 +1,4 @@
-## Проектная работа № 13 Яндекс.Практикум
+## Проектная работа № 14 Яндекс.Практикум
 
 ### Содержание
 1. [Структура проекта](#structure)
@@ -15,6 +15,7 @@
     ./routes - папка, содержащая роуты для обработки запросов пользователей
     ./controllers - папка с контроллерами
     ./models - папка, содержащая схемы mongodb
+    ./middlewarez - папка, содержащая скрипт авторизации
 
 
 <a name='#install'></a>
@@ -51,13 +52,17 @@
      eslint-plugin-import: 2.20.2,
      express: 4.17.1
      nodemon: 2.0.2,
-     validator: 13.0.0
+     validator: 13.0.0,
+     bcryptjs: 2.4.3,
+     jsonwebtoken: 8.5.1,
+     mongoose: 5.9.9,
+     cookie-parser: 1.4.5
 
 <a name='version'></a>
 ### Версия: 1.0.0
 
 <a name='link'></a>
-### Ссылка на адрес страницы: https://tatiana81.github.io/YP-project13/
+### Ссылка на адрес страницы: https://tatiana81.github.io/project14/
 
 <a name='author'></a>
 ### Автор: Суроева Татьяна
