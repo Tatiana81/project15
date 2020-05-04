@@ -17,10 +17,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 2,
     maxlength: 30,
-    validate: {
-      validator: (value) => validator.isAlpha(value),
-      message: 'Некорректное описание',
-    },
   },
   avatar: {
     type: String,
