@@ -53,18 +53,16 @@ const findAllUsers = (req, res) => {
     .catch((err) => res.status(500).send({ message: `Произошла ошибка ${err}` }));
 };
 
+// eslint-disable-next-line consistent-return
 const createUser = (req, res) => {
   const {
     name, about, avatar, email, password,
   } = req.body;
-  console.log('createUser', name, about, avatar, email, password);
+  if (password.length < 8) return res.status(400).send({ data: 'Длина пароля меньше 8 символов' });
   bcrypt.hash(password, 10)
-    .then((hash) => {
-      const user = User.create({
-        name, about, avatar, email, password: hash,
-      });
-      return user;
-    })
+    .then((hash) => User.create({
+      name, about, avatar, email, password: hash,
+    }))
     .then((user) => res.send({
       data: {
         _id: user._id, name: user.name, about: user.about, avatar: user.avatar, email: user.email,
