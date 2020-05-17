@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
   }
   let payload;
   try {
-    payload = jwt.verify(authorization, 'some-secret-key');
+    payload = jwt.verify(authorization, 'dev-secret');
     console.log('payload: ', payload);
   } catch (err) {
     return res
