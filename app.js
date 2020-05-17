@@ -25,6 +25,12 @@ app.use(cookieParser());
 app.use(requestLogger);
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.post('/signin', login);
 app.post('/signup', createUser);
 
