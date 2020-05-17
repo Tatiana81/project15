@@ -6,6 +6,9 @@ const NotFoundError = require('../errors/not-found-err');
 const ServerError = require('../errors/server-error');
 const AuthorError = require('../errors/AuthorizationError');
 const ValidationError = require('../errors/validation-error');
+require('dotenv').config();
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
@@ -20,7 +23,7 @@ const login = (req, res, next) => {
     })
     .then((array) => {
       if (!array[0]) throw new AuthorError('Неправильные почта или пароль');
-      const token = jwt.sign({ _id: array[1]._id }, 'some-secret-key', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: array[1]._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       res.cookie('jwt', token, {
         maxAge: 604800000,
         httpOnly: true,
