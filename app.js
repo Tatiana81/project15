@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(requestLogger);
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -31,6 +31,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.post('/signin', login);
 app.post('/signup', createUser);
 
