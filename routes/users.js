@@ -17,16 +17,10 @@ router.patch('/me', celebrate({
     about: Joi.string().required().min(2).max(30),
     avatar: Joi.string().required().uri(),
   }),
-  headers: Joi.object.keys({
-    'Content-type': Joi.string().pattern('/^application/json/'),
-  }),
 }), updateUser);
 router.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().required().uri(),
-  }),
-  headers: Joi.object.keys({
-    'Content-type': Joi.string().pattern('/^application/json/'),
   }),
 }), updateAvatar);
 
