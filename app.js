@@ -7,7 +7,7 @@ const { errors } = require('celebrate');
 const router = require('./routes/index');
 const { createUser, login } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// require('dotenv').config();
+require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
 const app = express();
