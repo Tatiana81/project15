@@ -41,8 +41,7 @@ app.use(errorLogger);
 app.use(errors());
 
 app.use((err, req, res, next) => {
-  if (!err) res.status(500).send({ message: 'Ошибка сервера' });
-  else res.status(err.statusCode).send({ message: err.message });
+  res.status(err.statusCode).send({ message: err.message });
 });
 
 app.listen(PORT, () => {
