@@ -26,9 +26,7 @@ app.use(requestLogger);
 
 
 app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
+  throw new Error('Сервер сейчас упадёт');
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
