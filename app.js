@@ -7,7 +7,7 @@ const { errors } = require('celebrate');
 const router = require('./routes/index');
 const { createUser, login } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-require('dotenv').config();
+// require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -36,12 +36,12 @@ app.post('/signup', createUser);
 
 app.use(router);
 
-app.use(errorLogger); // подключаем логгер ошибок
+app.use(errorLogger);
 
-app.use(errors()); // обработчик ошибок celebrate
+app.use(errors());
 
 app.use((err, req, res, next) => {
-  if (!err) res.status(500).send({ message: 'Ошибка сервеа' });
+  if (!err) res.status(500).send({ message: 'Ошибка сервера' });
   else res.status(err.statusCode).send({ message: err.message });
 });
 
