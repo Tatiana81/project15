@@ -10,11 +10,7 @@ router.get('/:userId', celebrate({
     userId: Joi.string().alphanum().length(24),
   }),
 }), findUser);
-router.get('/', celebrate({
-  headers: Joi.object().keys({
-    'Content-Type': 'application/json',
-  }),
-}), findAllUsers);
+router.get('/', findAllUsers);
 router.patch('/me', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),

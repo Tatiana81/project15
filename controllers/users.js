@@ -6,6 +6,7 @@ const NotFoundError = require('../errors/not-found-err');
 const ServerError = require('../errors/server-error');
 const AuthorError = require('../errors/AuthorizationError');
 const ValidationError = require('../errors/validation-error');
+require('dotenv').config();
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
