@@ -1,4 +1,4 @@
-## Проектная работа № 15 Яндекс.Практикум
+## Проектная работа № 14 Яндекс.Практикум
 
 ### Содержание
 1. [Структура проекта](#structure)
@@ -15,34 +15,22 @@
     ./routes - папка, содержащая роуты для обработки запросов пользователей
     ./controllers - папка с контроллерами
     ./models - папка, содержащая схемы mongodb
-    ./middlewares - папка, содержащая скрипт авторизации
-    ./errors - папка, содержащая скрипты для формирования подклассов ошибок
+    ./middlewarez - папка, содержащая скрипт авторизации
 
 
 <a name='#install'></a>
 ### Этапы установки
     Клонировать репозиторий
-    
+
+    git clone https://github.com/Tatiana81/YP-project13.git
+
     Установить пакеты, указанные в разделе Используемые модули, с помощью npm install
 
-    В случае дальнейшей разработки проекта:
+    В зависимости от решаемой задачи
 
      a. Запустить веб-сервер разработчика командой npm run dev для визуального контроля изменений.
 
      b. Запустить сервер для обработки запросов пользователей командой npm run start
-    
-    В случае деплоя на сервер:
-    
-    Установить на сервер github, mongodb, nginx
-    
-    Клонировать репозиторий в рабочую папку 
-
-    git clone https://github.com/Tatiana81/project14.git 
-
-    Запустить процесс pm2 start app.js
-    
-    Проверить работоспособность приложения по адресу, указанному в разделе Ссылки
-    
 
 <a name='config'></a>
 ### Конфигурационные файлы проекта:
@@ -58,31 +46,23 @@
 
 <a name='modules'></a>
 ### Используемые модули
-     bcryptjs: 2.4.3,
      body-parser: 1.19.0,
-     celebrate: 12.1.1,
-     cookie-parser: 1.4.5,
-     dotenv: 8.2.0,
-     express: 4.17.1,
-     express-winston": 4.0.3,
-     joi: 14.3.1,
-     jsonwebtoken: 8.5.1,
-     mongoose: 5.9.9,
-     nodemon: 2.0.2,
-     validator: 13.0.0,
-     winston: 3.2.1,
      eslint: 6.8.0,
      eslint-config-airbnb-base: 14.1.0,
-     eslint-plugin-import": 2.20.2,
+     eslint-plugin-import: 2.20.2,
+     express: 4.17.1
+     nodemon: 2.0.2,
+     validator: 13.0.0,
+     bcryptjs: 2.4.3,
+     jsonwebtoken: 8.5.1,
+     mongoose: 5.9.9,
+     cookie-parser: 1.4.5
 
 <a name='version'></a>
 ### Версия: 1.0.0
 
 <a name='link'></a>
 ### Ссылка на адрес страницы: https://tatiana81.github.io/project14/
-### IP-адрес: 84.201.129.238
-### Доменное имя: tsmesto.gq (api.tsmesto.gq)
-
 
 <a name='author'></a>
 ### Автор: Суроева Татьяна
