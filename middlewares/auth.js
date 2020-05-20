@@ -13,14 +13,12 @@ module.exports = (req, res, next) => {
   let payload;
   try {
     payload = jwt.verify(authorization, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
-    console.log('payload: ', payload);
   } catch (err) {
     return res
       .status(401)
       .send({ message: `Необходима авторизация ${err}` });
   }
   req.user = payload;
-  console.log(req.user);
   next();
   return req.user;
 };

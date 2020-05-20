@@ -11,7 +11,6 @@ const getCards = (req, res, next) => {
 };
 
 const deleteCard = (req, res, next) => {
-  console.log(req.params.cardId, req.user._id);
   if (validator.isMongoId(req.params.cardId)) {
     Card.findOneAndRemove({ _id: req.params.cardId, owner: req.user._id })
       .then((user) => res.send({ data: user }))
@@ -22,7 +21,7 @@ const deleteCard = (req, res, next) => {
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
-    .then((card) => { console.log(card); res.send({ data: card }); })
+    .then((card) => res.send({ data: card }))
     .catch(next);
 };
 
