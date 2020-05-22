@@ -37,7 +37,7 @@
     
     Клонировать репозиторий в рабочую папку 
 
-    git clone https://github.com/Tatiana81/project14.git 
+    git clone https://github.com/Tatiana81/project15.git 
 
     Запустить процесс pm2 start app.js
     
@@ -79,7 +79,7 @@
 ### Версия: 1.0.0
 
 <a name='link'></a>
-### Ссылка на адрес страницы: https://tatiana81.github.io/project14/
+### Ссылка на адрес страницы: https://tatiana81.github.io/project15/
 ### IP-адрес: 84.201.129.238
 ### Доменное имя: tsmesto.gq (api.tsmesto.gq)
 
