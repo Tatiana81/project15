@@ -41,7 +41,7 @@ router
     }),
   }), createUser)
   .use((err, req, res) => {
-    if (!err.statusCode) res.status(500).send({ message: 'Ощибка сервера' });
+    if (!err.statusCode) res.status(500).send({ message: 'Ошибка сервера' });
     res.status(err.statusCode).send({ message: err.message });
   });
 

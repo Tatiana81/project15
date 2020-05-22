@@ -81,7 +81,7 @@
 <a name='link'></a>
 ### Ссылка на адрес страницы: https://tatiana81.github.io/project15/
 ### IP-адрес: 84.201.128.123
-### Доменное имя: tsmesto.gq (api.tsmesto.gq)
+### Доменное имя: tsmesto.gq
 
 
 <a name='author'></a>
