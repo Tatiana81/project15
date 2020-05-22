@@ -19,11 +19,11 @@ router
       jwt: Joi.string().length(172),
     }),
   }), auth, users)
-  .use('*', (req, res, next) => {
-    next(new NotFoundError('Запрашиваемый ресурс не найден'));
-  })
   .get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
+  })
+  .use('*', (req, res, next) => {
+    next(new NotFoundError('Запрашиваемый ресурс не найден'));
   })
   .post('/signin', celebrate({
     body: Joi.object().keys({
