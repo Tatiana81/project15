@@ -5,6 +5,7 @@ const NotFoundError = require('../errors/not-found-err');
 
 const getCards = (req, res, next) => {
   Card.find({})
+    .orFail(new NotFoundError('В базе данных нет ни одной карточки'))
     .populate('owner')
     .then((card) => res.send({ data: card }))
     .catch(next);
@@ -13,9 +14,10 @@ const getCards = (req, res, next) => {
 const deleteCard = (req, res, next) => {
   if (validator.isMongoId(req.params.cardId)) {
     Card.findOneAndRemove({ _id: req.params.cardId, owner: req.user._id })
+      .orFail(new NotFoundError('Нет карточки с таким id'))
       .then((user) => res.send({ data: user }))
       .catch(next);
-  } else next(new NotFoundError('Нет карточки с таким id'));
+  }
 };
 
 const createCard = (req, res, next) => {
@@ -26,25 +28,25 @@ const createCard = (req, res, next) => {
 };
 
 const likeCard = (req, res, next) => {
-  if (req.params.cardId && validator.isMongoId(req.params.cardId)) {
-    Card.findByIdAndUpdate(
-      req.params.cardId,
-      { $addToSet: { likes: req.user._id } },
-      { new: true },
-    ).then((card) => res.send({ data: card }))
-      .catch(next);
-  } else next(new NotFoundError('Нет карточки с таким id'));
+  Card.findByIdAndUpdate(
+    req.params.cardId,
+    { $addToSet: { likes: req.user._id } },
+    { new: true },
+  )
+    .orFail(new NotFoundError('Нет карточки с таким id'))
+    .then((card) => res.send({ data: card }))
+    .catch(next);
 };
 
 const dislikeCard = (req, res, next) => {
-  if (req.params.cardId && validator.isMongoId(req.params.cardId)) {
-    Card.findByIdAndUpdate(
-      req.params.cardId,
-      { $pull: { likes: req.user._id } },
-      { new: true },
-    ).then((card) => res.send({ data: card }))
-      .catch(next);
-  } else next(new NotFoundError('Нет карточки с таким id'));
+  Card.findByIdAndUpdate(
+    req.params.cardId,
+    { $pull: { likes: req.user._id } },
+    { new: true },
+  )
+    .orFail(new NotFoundError('Нет карточки с таким id'))
+    .then((card) => res.send({ data: card }))
+    .catch(next);
 };
 
 module.exports = {
