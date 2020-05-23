@@ -8,7 +8,7 @@ const {
 router.get('/:userId', celebrate({
   cookies: Joi.object().keys({
     jwt: Joi.string().length(172),
-  }),
+  }).unknown(true),
   params: Joi.object().keys({
     userId: Joi.string().alphanum().length(24),
   }),
@@ -17,13 +17,13 @@ router.get('/:userId', celebrate({
 router.get('/', celebrate({
   cookies: Joi.object().keys({
     jwt: Joi.string().length(172),
-  }),
+  }).unknown(true),
 }), findAllUsers);
 
 router.patch('/me', celebrate({
   cookies: Joi.object().keys({
     jwt: Joi.string().length(172),
-  }),
+  }).unknown(true),
   body: Joi.object().keys({
     name: Joi.string().required().alphanum().min(2)
       .max(30),
@@ -36,7 +36,7 @@ router.patch('/me', celebrate({
 router.patch('/me/avatar', celebrate({
   cookies: Joi.object().keys({
     jwt: Joi.string().length(172),
-  }),
+  }).unknown(true),
   body: Joi.object().keys({
     avatar: Joi.string().required().uri(),
   }),

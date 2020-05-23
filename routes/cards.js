@@ -9,13 +9,13 @@ const {
 router.get('/', celebrate({
   cookies: Joi.object().keys({
     jwt: Joi.string().length(172),
-  }),
+  }).unknown(true),
 }), getCards);
 
 router.post('/', celebrate({
   cookies: Joi.object().keys({
     jwt: Joi.string().length(172),
-  }),
+  }).unknown(true),
   body: Joi.object().keys({
     name: Joi.string().required().alphanum().min(2)
       .max(30),
@@ -26,7 +26,7 @@ router.post('/', celebrate({
 router.delete('/:cardId', celebrate({
   cookies: Joi.object().keys({
     jwt: Joi.string().length(172),
-  }),
+  }).unknown(true),
   params: Joi.object().keys({
     cardId: Joi.string().alphanum().length(24),
   }),
@@ -35,7 +35,7 @@ router.delete('/:cardId', celebrate({
 router.put('/:cardId/likes', celebrate({
   cookies: Joi.object().keys({
     jwt: Joi.string().length(172),
-  }),
+  }).unknown(true),
   params: Joi.object().keys({
     cardId: Joi.string().alphanum().length(24),
   }),
@@ -44,7 +44,7 @@ router.put('/:cardId/likes', celebrate({
 router.delete('/:cardId/likes', celebrate({
   cookies: Joi.object().keys({
     jwt: Joi.string().length(172),
-  }),
+  }).unknown(true),
   params: Joi.object().keys({
     cardId: Joi.string().alphanum().length(24),
   }),

@@ -30,12 +30,12 @@ router
   .use('/cards', celebrate({
     cookies: Joi.object().keys({
       jwt: Joi.string().length(172),
-    }),
+    }).unknown(true),
   }), auth, cards)
   .use('/users', celebrate({
     cookies: Joi.object().keys({
       jwt: Joi.string().length(172),
-    }),
+    }).unknown(true),
   }), auth, users)
   .get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
