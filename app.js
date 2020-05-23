@@ -21,6 +21,4 @@ app.use(cookieParser());
 
 app.use(router);
 
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-});
+app.listen(PORT);
