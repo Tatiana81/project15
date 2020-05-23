@@ -1,5 +1,5 @@
 {
-    "name": "project14",
+    "name": "project15",
     "version": "1.0.0",
     "description": "Yandex praktikum project 15",
     "main": "app.js",
@@ -24,6 +24,7 @@
         "eslint-plugin-import": "^2.20.2"
     },
     "scripts": {
+        "dev": "nodemon app.js",
         "start": "node app.js",
         "lint": "eslint ."
     },
