@@ -38,7 +38,9 @@ router
     }).unknown(true),
   }), auth, users)
   .get('/crash-test', () => {
-    throw new Error('Сервер сейчас упадёт');
+    setTimeout(() => {
+      throw new Error('Сервер сейчас упадёт');
+    }, 0);
   })
   .use('*', (req, res, next) => {
     next(new NotFoundError('Запрашиваемый ресурс не найден'));
