@@ -11,10 +11,13 @@ const login = (req, res, next) => {
   User.findOne({ email })
     .orFail(new AuthorError('Неправильные почта или пароль'))
     .select('+password')
-    .then((user) => bcrypt.compare(password, user.password))
-    .then((matched) => {
+    .then((user) => {
+      const matched = bcrypt.compare(password, user.password);
+      return (matched, user);
+    })
+    .then((matched, user) => {
       if (matched) {
-        const token = jwt.sign({ email }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+        const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
         res.cookie('jwt', token, { maxAge: 604800000, httpOnly: true });
         return res.send(token);
       }

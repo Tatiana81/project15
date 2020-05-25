@@ -2,7 +2,6 @@
 const Card = require('../models/card');
 const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-err');
-const ValidationError = require('../errors/validation-error');
 const PermissionError = require('../errors/permission-error');
 
 
