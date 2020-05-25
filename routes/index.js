@@ -29,12 +29,12 @@ router
   }), createUser)
   .use('/cards', celebrate({
     cookies: Joi.object().keys({
-      jwt: Joi.string().length(172),
+      jwt: Joi.string(),
     }).unknown(true),
   }), auth, cards)
   .use('/users', celebrate({
     cookies: Joi.object().keys({
-      jwt: Joi.string().length(172),
+      jwt: Joi.string(),
     }).unknown(true),
   }), auth, users)
   .get('/crash-test', () => {
@@ -47,7 +47,8 @@ router
   })
   .use(errorLogger)
   .use(errors())
-  .use((err, req, res) => {
+  // eslint-disable-next-line no-unused-vars
+  .use((err, req, res, next) => {
     const { statusCode = 500, message } = err;
     res
       .status(statusCode)

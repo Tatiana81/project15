@@ -9,19 +9,16 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const login = (req, res, next) => {
   const { email, password } = req.body;
   User.findOne({ email })
-    .select('+password')
     .orFail(new AuthorError('Неправильные почта или пароль'))
-    .then((user) => Promise.all([
-      bcrypt.compare(password, user.password),
-      user,
-    ]))
-    .then((array) => {
-      const token = jwt.sign({ _id: array[1]._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
-      res.cookie('jwt', token, {
-        maxAge: 604800000,
-        httpOnly: true,
-      });
-      return res.send(token);
+    .select('+password')
+    .then((user) => bcrypt.compare(password, user.password))
+    .then((matched) => {
+      if (matched) {
+        const token = jwt.sign({ email }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+        res.cookie('jwt', token, { maxAge: 604800000, httpOnly: true });
+        return res.send(token);
+      }
+      throw new AuthorError('Неправильные почта или пароль');
     })
     .catch(next);
 };
@@ -61,7 +58,7 @@ const createUser = (req, res, next) => {
 
 const updateUser = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, {
-    name: req.body.name, about: req.body.about, avatar: req.body.avatar,
+    name: req.body.name, about: req.body.about,
   }, { new: true })
     .orFail(new NotFoundError('Нет пользователя с таким id'))
     .then((user) => (res.send({ data: user })))
