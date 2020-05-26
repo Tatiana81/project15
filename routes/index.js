@@ -37,9 +37,9 @@ router
       jwt: Joi.string(),
     }).unknown(true),
   }), auth, users)
-  .get('/crash-test', (req, res, next) => {
+  .get('/crash-test', () => {
     setTimeout(() => {
-      next(new Error('Сервер сейчас упадёт'));
+      throw new Error('Сервер сейчас упадёт');
     }, 0);
   })
   .use('*', (req, res, next) => {

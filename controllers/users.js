@@ -11,18 +11,18 @@ const login = (req, res, next) => {
   User.findOne({ email })
     .orFail(new AuthorError('Неправильные почта или пароль'))
     .select('+password')
-    .then((user) => bcrypt.compare(password, user.password))
-    .then((matched) => {
-      if (!matched) throw new AuthorError('Неправильные почта или пароль');
-      const token = jwt.sign({ email }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
-      res.cookie('jwt', token, { maxAge: 604800000, httpOnly: true });
-      return res.send(token);
-    })
+    .then((user) => bcrypt.compare(password, user.password)
+      .then((matched) => {
+        if (!matched) throw new AuthorError('Неправильные почта или пароль');
+        const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+        res.cookie('jwt', token, { maxAge: 604800000, httpOnly: true });
+        return res.send(token);
+      }))
     .catch(next);
 };
 
 const findUser = (req, res, next) => {
-  User.findOne(req.params.userId)
+  User.findById(req.params.userId)
     .orFail(new NotFoundError('Нет пользователя с таким id'))
     .then((user) => {
       res.status(200).send({ data: user });
