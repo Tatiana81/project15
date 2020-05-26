@@ -40,7 +40,7 @@ router
   .get('/crash-test', () => {
     setTimeout(() => {
       throw new Error('Сервер сейчас упадёт');
-    }, 0);
+    }, 1000);
   })
   .use('*', (req, res, next) => {
     next(new NotFoundError('Запрашиваемый ресурс не найден'));
