@@ -1,4 +1,5 @@
 
+const validator = require('validator');
 const Card = require('../models/card');
 const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-err');
@@ -15,6 +16,7 @@ const getCards = (req, res, next) => {
 
 const deleteCard = async (req, res, next) => {
   const owner = await User.findOne({ email: req.user.email }).then((user) => user._id).catch(next);
+  if (!validator.isMongoId(req.params.cardId)) next(new NotFoundError('Нет карточки с таким id'));
   Card.findOne({ _id: req.params.cardId }, { new: true })
     .orFail(new NotFoundError('Нет карточки с таким id'))
     .then((card) => {

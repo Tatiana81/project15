@@ -12,22 +12,22 @@ const login = (req, res, next) => {
     .orFail(new AuthorError('Неправильные почта или пароль'))
     .select('+password')
     .then((user) => {
-      const matched = bcrypt.compare(password, user.password);
-      return (matched, user);
+      bcrypt.compare(password, user.password);
     })
-    .then((matched, user) => {
-      if (matched) {
-        const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+    .then((matched) => {
+      console.log(matched);
+      if (matched !== undefined) throw new AuthorError('Неправильные почта или пароль');
+      else {
+        const token = jwt.sign({ email }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
         res.cookie('jwt', token, { maxAge: 604800000, httpOnly: true });
         return res.send(token);
       }
-      throw new AuthorError('Неправильные почта или пароль');
     })
     .catch(next);
 };
 
 const findUser = (req, res, next) => {
-  User.findById(req.params.userId)
+  User.findOne(req.params.userId)
     .orFail(new NotFoundError('Нет пользователя с таким id'))
     .then((user) => {
       res.status(200).send({ data: user });
@@ -60,19 +60,19 @@ const createUser = (req, res, next) => {
 };
 
 const updateUser = (req, res, next) => {
-  User.findByIdAndUpdate(req.user._id, {
+  User.findOneAndUpdate(req.user.email, {
     name: req.body.name, about: req.body.about,
   }, { new: true })
-    .orFail(new NotFoundError('Нет пользователя с таким id'))
+    .orFail(new NotFoundError('Нет пользователя с таким email'))
     .then((user) => (res.send({ data: user })))
     .catch(next);
 };
 
 const updateAvatar = (req, res, next) => {
-  User.findOneAndUpdate(req.user._id, {
+  User.findOneAndUpdate(req.user.email, {
     avatar: req.body.avatar,
   }, { new: true })
-    .orFail(new NotFoundError('Нет пользователя с таким id'))
+    .orFail(new NotFoundError('Нет пользователя с таким email'))
     .then((user) => (res.send({ data: user })))
     .catch(next);
 };
