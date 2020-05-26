@@ -11,17 +11,12 @@ const login = (req, res, next) => {
   User.findOne({ email })
     .orFail(new AuthorError('Неправильные почта или пароль'))
     .select('+password')
-    .then((user) => {
-      bcrypt.compare(password, user.password);
-    })
+    .then((user) => bcrypt.compare(password, user.password))
     .then((matched) => {
-      console.log(matched);
-      if (matched !== undefined) throw new AuthorError('Неправильные почта или пароль');
-      else {
-        const token = jwt.sign({ email }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
-        res.cookie('jwt', token, { maxAge: 604800000, httpOnly: true });
-        return res.send(token);
-      }
+      if (!matched) throw new AuthorError('Неправильные почта или пароль');
+      const token = jwt.sign({ email }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      res.cookie('jwt', token, { maxAge: 604800000, httpOnly: true });
+      return res.send(token);
     })
     .catch(next);
 };

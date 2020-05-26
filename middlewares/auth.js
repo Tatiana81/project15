@@ -18,7 +18,6 @@ module.exports = (req, res, next) => {
       .status(401)
       .send({ message: `Необходима авторизация ${err}` });
   }
-  console.log(payload);
   req.user = payload;
   next();
   return req.user;
