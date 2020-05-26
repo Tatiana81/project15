@@ -16,7 +16,7 @@ const deleteCard = (req, res, next) => {
     .orFail(new NotFoundError('Нет карточки с таким id'))
     .then((card) => {
       if (!card.owner.equals(req.user._id)) throw new PermissionError('У Вас нет прав на удаление чужой карточки');
-      return Card.deleteCard(card)
+      return Card.deleteOne(card)
         .then(() => res.send({ data: card }));
     })
     .catch(next);
