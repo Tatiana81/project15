@@ -8,7 +8,7 @@ const cardSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
     validate: {
-      validator: (value) => validator.isAlpha(value),
+      validator: (value) => /[\w\s]{2,30}/.test(value),
       message: 'Некорректное имя карточки',
     },
   },

@@ -1,7 +1,7 @@
 {
-    "name": "project14",
+    "name": "project15",
     "version": "1.0.0",
-    "description": "Yandex praktikum project 14",
+    "description": "Yandex praktikum project 15",
     "main": "app.js",
     "dependencies": {
         "bcryptjs": "^2.4.3",
@@ -16,31 +16,27 @@
         "mongoose": "^5.9.9",
         "nodemon": "^2.0.2",
         "validator": "^13.0.0",
-        "webpack": "^4.43.0",
         "winston": "^3.2.1"
     },
     "devDependencies": {
         "eslint": "^6.8.0",
         "eslint-config-airbnb-base": "^14.1.0",
-        "eslint-plugin-import": "^2.20.2",
-        "webpack-cli": "^3.3.11"
+        "eslint-plugin-import": "^2.20.2"
     },
     "scripts": {
-        "dev": "NODE_ENV=development nodemon app.js --watch server",
-        "build": "NODE_ENV=production rimraf dist && webpack --mode production",
+        "dev": "nodemon app.js",
         "start": "node app.js",
-        "lint": "eslint .",
-        "deploy": "npm run build && scp -r ./dist/* praktikum@84.201.129.238:/home/admin/frontend"
+        "lint": "eslint ."
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Tatiana81/project12.git"
+        "url": "git+https://github.com/Tatiana81/project15.git"
     },
     "keywords": [],
-    "author": "",
+    "author": "Suroeva Tatiana",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/Tatiana81/project12/issues"
+        "url": "https://github.com/Tatiana81/project15/issues"
     },
-    "homepage": "https://github.com/Tatiana81/project12#readme"
+    "homepage": "https://github.com/Tatiana81/project15#readme"
 }
